@@ -33,25 +33,21 @@ const ifChainOperation = () => {
 const add = () => {
   ifChainOperation();
   operator = "+";
-  console.log("add");
 };
 
 const minus = () => {
   ifChainOperation();
   operator = "-";
-  console.log("minus");
 };
 
 const multiply = () => {
   ifChainOperation();
   operator = "x";
-  console.log("multiply");
 };
 
 const divide = () => {
   ifChainOperation();
   operator = "/";
-  console.log("divide");
 };
 
 const del = () => {
@@ -78,7 +74,6 @@ const dot = () => {
     num2 += ".";
     updateValue(num2);
   }
-  console.log(".");
 };
 
 const equal = () => {
@@ -106,16 +101,31 @@ const equal = () => {
     default:
       break;
   }
-  console.log("equal call");
 };
 
 function updateValue(value) {
   displayValue.textContent = value;
+  removeLeadingZero();
+  console.log(displayValue.textContent);
+}
+
+function removeLeadingZero() {
+  if (
+    displayValue.textContent.indexOf("0") === 0 &&
+    !displayValue.textContent.includes(".") &&
+    displayValue.textContent.length > 0
+  ) {
+    displayValue.textContent = parseInt(displayValue.textContent);
+  } else if (
+    displayValue.textContent.indexOf("0") === 0 &&
+    displayValue.textContent.includes(".")
+  ) {
+    displayValue.textContent = parseFloat(displayValue.textContent);
+  }
 }
 
 function resetValue() {
   displayValue.textContent = "";
-  console.log("reset value");
 }
 
 numberButtons.forEach((button) => {
@@ -132,40 +142,29 @@ numberButtons.forEach((button) => {
 
 operatorButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    //add if statement here to tell if there is other operator, if there is operator then call equal
     switch (button.id) {
       case "=":
-        console.log("=");
-        console.log(num1);
-        console.log(num2);
         equal();
         break;
       case "+":
-        console.log(button.id);
         add();
         break;
       case "-":
-        console.log("-");
         minus();
         break;
       case "x":
-        console.log("x");
         multiply();
         break;
       case "/":
-        console.log("/");
         divide();
         break;
       case "C":
-        console.log("C");
         clear();
         break;
       case "DEL":
-        console.log("DEL");
         del();
         break;
       case ".":
-        console.log(".");
         dot();
         break;
       default:
@@ -173,7 +172,3 @@ operatorButtons.forEach((button) => {
     }
   });
 });
-
-// function callOperator(oper) {
-//   operator = oper;
-// }
